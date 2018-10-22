@@ -3,11 +3,10 @@
 #define LINE_SIZE 80
 #define MSH       "(msh-1.0)"
 #define PROMPT    MSH "$ "
-#define NOT_FOUND "%s: not found\n"
-#define USAGE     "Usage: %s [-c \'command arg...\']\n" \
+#define USAGE     "Usage: %s [-c \'command arg ...\']\n" \
                   "Option:\n" \
-									"  -c command : execute command\n" \
-									"  -h         : display help\n"
+									"  -c command arg ...: execute COMMAND with ARGs\n" \
+									"  -h                : display help\n"
 
 int8_t
 shell(int argc, char **argv)

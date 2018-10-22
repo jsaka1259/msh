@@ -5,7 +5,7 @@ SCMD   := $(SCMN)/cmd
 
 OBJS   := main.o
 OBJS   += $(SCMN)/cmd.o $(SCMN)/parse.o $(SCMN)/shell.o $(SCMN)/utils.o
-OBJS   += $(SCMD)/echo.o $(SCMD)/help.o $(SCMD)/quit.o
+OBJS   += $(SCMD)/echo.o $(SCMD)/help.o $(SCMD)/exit.o
 
 CC     := gcc
 CFLAGS := -Wall
