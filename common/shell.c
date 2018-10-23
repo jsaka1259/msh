@@ -44,7 +44,6 @@ shell(int argc, char **argv)
 		while (1) {
 			fprintf(stdout, "%s", PROMPT);
 			fflush(stdout);
-
 			get_cmd(line, sizeof(line));
 			cmd = parse_cmd(line);
 			if (cmd->argc > 0) {

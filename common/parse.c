@@ -44,13 +44,6 @@ parse_cmd(char *line)
 	return cmd;
 }
 
-void
-free_cmd(cmd_t *cmd)
-{
-	free(cmd->argv);
-	free(cmd);
-}
-
 int8_t
 exec_cmd(cmd_t *cmd)
 {
@@ -63,4 +56,11 @@ exec_cmd(cmd_t *cmd)
 		}
 	}
 	return 1;
+}
+
+void
+free_cmd(cmd_t *cmd)
+{
+	free(cmd->argv);
+	free(cmd);
 }

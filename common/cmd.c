@@ -1,5 +1,11 @@
 #include <common.h>
 
+const int8_t (*cmd_handler[NCMD])(uint32_t argc, char **argv) = {
+	msh_echo,
+	msh_exit,
+	msh_help,
+};
+
 const char cmds[NCMD][CMDLEN] = {
 	"echo",
 	"exit",
@@ -32,10 +38,4 @@ const char cmd_desc[NCMD][DESCLEN] = {
 	"    Arguments:\n"
 	"      PATTERN	Pattern specifiying a help topic"
 	,
-};
-
-const int8_t (*cmd_handler[NCMD])(uint32_t argc, char **argv) = {
-	msh_echo,
-	msh_exit,
-	msh_help,
 };
