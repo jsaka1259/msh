@@ -1,8 +1,9 @@
 #include <common.h>
 
 #define LINE_SIZE 80
-#define MSH       "(msh-1.0)"
-#define PROMPT    MSH "$ "
+#define MSH       "msh"
+#define VERSION   "0.1"
+#define PROMPT    "(" MSH "-" VERSION ")$ "
 #define USAGE     "Usage: %s [-c \'command arg ...\']\n" \
                   "Option:\n" \
 									"  -c command arg ...: execute COMMAND with ARGs\n" \
