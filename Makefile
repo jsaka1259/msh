@@ -9,7 +9,7 @@ OBJS   += $(SCMD)/echo.o $(SCMD)/help.o $(SCMD)/exit.o
 
 CC     := gcc
 CFLAGS := -Wall
-INC    := -I $(PWD)/$(SCMN)
+INC    := -I $(SCMN)
 RM     := rm
 
 .SUFFIXES: .c .o
