@@ -12,8 +12,12 @@ $ make
 ```bash
 $ ./msh
 ```
-
 ## Help
+```bash
+$ ./msh -h
+```
+
+## Command Help
 ```bash
 $ ./msh -c help
 ```
