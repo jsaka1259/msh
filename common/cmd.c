@@ -20,7 +20,7 @@ const char cmd_usage[NCMD][USAGELEN] = {
 
 const char cmd_desc[NCMD][DESCLEN] = {
 	"    Write arguments to the standard output.\n"
-	 "\n"
+	"\n"
 	"    Display the ARGs, separated by a single space character and followed by a\n"
 	"    newline, on the standard output."
 	,
