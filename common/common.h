@@ -6,8 +6,10 @@
 #include <stdint.h>
 #include <string.h>
 #include <unistd.h>
+#include <termios.h>
 
 #include "cmd.h"
+#include "getch.h"
 #include "parse.h"
 #include "shell.h"
 #include "utils.h"

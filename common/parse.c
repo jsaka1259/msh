@@ -3,14 +3,38 @@
 void
 get_cmd(char *line, size_t size)
 {
-	if ((fgets(line, size, stdin)) == NULL) {
-		fprintf(stdout, "\n");
-		exit(0);
+	size_t i;
+	char c;
+	if (2 > size) {
+		fprintf(stderr, "\rSystem Error: line buffer size is invalid [%ld]\n",
+		        size);
+		exit(1);
 	}
-	if (line[strlen(line) - 1] == 0x0A)
-		line[strlen(line) - 1] = 0x00;
-	else
-		while (fgetc(stdin) != 0x0A) ;
+	i = 0;
+	while ((c = getch()) != 0x0a) {
+		if (c == 0x04) {
+			fputc('\n', stdout);
+			fflush(stdout);
+			exit(0);
+		}
+		else if (i > 0 && c == 0x7F) {
+			i--;
+			fputs("\b \b", stdout);
+			fflush(stdout);
+		}
+		else if (0x20 <= c && 0x7e >= c) {
+			fputc(c, stdout);
+			fflush(stdout);
+			if (size-1 > i) {
+				line[i] = c;
+				i++;
+			}
+		}
+		else ;
+	}
+	line[i] = 0x00;
+	fputc('\n', stdout);
+	fflush(stdout);
 }
 
 cmd_t*
