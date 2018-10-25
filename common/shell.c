@@ -6,8 +6,8 @@
 #define PROMPT    "(" MSH "-" VERSION ")$ "
 #define USAGE     "Usage: %s [-c \'command arg ...\']\n" \
                   "Option:\n" \
-									"  -c command arg ...: execute COMMAND with ARGs\n" \
-									"  -h                : display help\n"
+                  "  -c command arg ...: execute COMMAND with ARGs\n" \
+                  "  -h                : display help\n"
 
 int8_t
 shell(int argc, char **argv)
