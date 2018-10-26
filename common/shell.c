@@ -1,6 +1,5 @@
 #include <common.h>
 
-#define LINE_SIZE 80
 #define MSH       "msh"
 #define VERSION   "0.0.2"
 #define PROMPT    "(" MSH "-" VERSION ")$ "
@@ -14,14 +13,14 @@ shell(int argc, char **argv)
 {
 	int     opt;
 	uint8_t copt = 0;
-	char    line[LINE_SIZE];
 	int8_t  ret;
 
 	while ((opt = getopt(argc, argv, "c:h")) != -1) {
 		switch (opt) {
 			case 'c':
 				copt = 1;
-				strncpy(line, optarg, sizeof(line));
+				line = xmalloc(sizeof(char*) * LINE_SIZE);
+				strncpy(line, optarg, LINE_SIZE);
 				break;
 			case 'h':
 			case '?':
@@ -34,19 +33,27 @@ shell(int argc, char **argv)
 	if (copt) {
 		cmd = parse_cmd(line);
 		if (cmd->argc > 0) {
-			if (exec_cmd(cmd)) {
+			ret = exec_cmd(cmd);
+			if (CHECK_RET_EXIT(ret)) {
+				free_cmd(cmd);
+				if (ret == RET_NORMAL_EXIT)
+					exit(0);
+				else
+					exit(1);
+			}
+			else if (ret == RET_NOT_FOUND) {
 				fprintf(stdout, NOT_FOUND, cmd->argv[0]);
 				fflush(stdout);
 			}
 		}
 		free_cmd(cmd);
+		free(line);
 	}
 	else {
 		while (1) {
 			fprintf(stdout, "%s", PROMPT);
 			fflush(stdout);
-			get_cmd(line, sizeof(line));
-			cmd = parse_cmd(line);
+			cmd = parse_cmd(get_line());
 			if (cmd->argc > 0) {
 				ret = exec_cmd(cmd);
 				if (CHECK_RET_EXIT(ret)) {

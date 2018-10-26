@@ -10,6 +10,7 @@
 
 #include "cmd.h"
 #include "getch.h"
+#include "line.h"
 #include "parse.h"
 #include "shell.h"
 #include "utils.h"

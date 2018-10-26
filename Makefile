@@ -4,8 +4,8 @@ SCMN   := common
 SCMD   := $(SCMN)/cmd
 
 OBJS   := main.o
-OBJS   += $(SCMN)/cmd.o $(SCMN)/getch.o $(SCMN)/parse.o \
-          $(SCMN)/shell.o $(SCMN)/utils.o
+OBJS   += $(SCMN)/cmd.o $(SCMN)/getch.o $(SCMN)/line.o \
+          $(SCMN)/parse.o $(SCMN)/shell.o $(SCMN)/utils.o
 OBJS   += $(SCMD)/echo.o $(SCMD)/exit.o $(SCMD)/help.o
 
 CC     := gcc

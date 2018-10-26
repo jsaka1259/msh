@@ -6,7 +6,7 @@ msh_help(uint32_t argc, char **argv)
 	uint32_t i, j;
 	int8_t found;
 
-	if (argc <= 1) {
+	if (1 >= argc) {
 		for (i = 0; i < NCMD; i++ ) {
 			fprintf(stdout, "%s\n", cmd_usage[i]);
 		}
