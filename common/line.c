@@ -32,7 +32,7 @@ get_line(void)
 		else if (0x20 <= c && 0x7e >= c) {
 			fputc(c, stdout);
 			fflush(stdout);
-			if (LINE_SIZE - 1 > i) {
+			if (LINE_SIZE - 2 > i) {
 				line[i] = c;
 				i++;
 			}
