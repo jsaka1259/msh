@@ -1,5 +1,7 @@
 #include <common.h>
 
+cmd_t *cmd;
+
 const int8_t (*cmd_handler[NCMD])(uint32_t argc, char **argv) = {
 	msh_echo,
 	msh_exit,

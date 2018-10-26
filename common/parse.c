@@ -1,7 +1,7 @@
 #include <common.h>
 
 void
-get_cmd(char *line, size_t size)
+get_cmd(char *line, const size_t size)
 {
 	size_t i;
 	char c;
@@ -12,9 +12,12 @@ get_cmd(char *line, size_t size)
 	}
 	i = 0;
 	while ((c = getch()) != 0x0a) {
-		if (c == 0x04) {
+		if (i == 0 && c == 0x04) {
 			fputc('\n', stdout);
 			fflush(stdout);
+			if (cmd != NULL) {
+				free_cmd(cmd);
+			}
 			exit(0);
 		}
 		else if (i > 0 && c == 0x7F) {
@@ -75,11 +78,10 @@ exec_cmd(cmd_t *cmd)
 
 	for (i = 0; i < NCMD; i++) {
 		if (strcmp(cmd->argv[0], cmds[i]) == 0) {
-			cmd_handler[i](cmd->argc, cmd->argv);
-			return 0;
+			return cmd_handler[i](cmd->argc, cmd->argv);
 		}
 	}
-	return 1;
+	return RET_NOT_FOUND;
 }
 
 void

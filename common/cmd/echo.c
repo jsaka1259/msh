@@ -8,5 +8,5 @@ msh_echo(uint32_t argc, char **argv)
 		fprintf(stdout, "%s%.*s", argv[i], (argc != 1 && i != argc - 1), " ");
 	fprintf(stdout, "\n");
 	fflush(stdout);
-	return 0;
+	return RET_NORMAL;
 }

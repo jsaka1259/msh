@@ -4,6 +4,7 @@ int8_t
 msh_help(uint32_t argc, char **argv)
 {
 	uint32_t i, j;
+	int8_t found;
 
 	if (argc <= 1) {
 		for (i = 0; i < NCMD; i++ ) {
@@ -11,8 +12,8 @@ msh_help(uint32_t argc, char **argv)
 		}
 	}
 	else {
-		int8_t found = 0;
 		for (i = 1; i < argc; i++) {
+			found = 0;
 			for (j = 0; j < NCMD; j++) {
 				if (strcmp(argv[i], cmds[j]) == 0) {
 					fprintf(stdout, "%s: %s\n", cmds[j], cmd_usage[j]);
@@ -20,11 +21,10 @@ msh_help(uint32_t argc, char **argv)
 					found = 1;
 				}
 			}
-			if (!found)
+			if (found == 0)
 				fprintf(stdout, NOT_FOUND, argv[i]);
 		}
 	}
-
 	fflush(stdout);
-	return 0;
+	return RET_NORMAL;
 }

@@ -3,8 +3,14 @@
 int8_t
 msh_exit(uint32_t argc, char **argv)
 {
-	if (argc == 0)
-		exit(0);
-	else
-		exit(atoi(argv[0]));
+	if (1 >= argc)
+		return RET_NORMAL_EXIT;
+	else {
+		switch (atoi(argv[1])) {
+			case 0:
+				return RET_NORMAL_EXIT;
+			default:
+				return RET_ABNORMAL_EXIT;
+		}
+	}
 }
