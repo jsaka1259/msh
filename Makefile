@@ -14,10 +14,6 @@ INC    := -I $(SCMN)
 RM     := rm
 
 .SUFFIXES: .c .o
-DEFAULT: all
-
-.PHONY: all
-all: $(TARGET)
 
 $(TARGET): $(OBJS)
 	$(CC) $(CFLAGS) $(INC) -o $@ $(notdir $^)
