@@ -36,6 +36,7 @@ shell(int argc, char **argv)
 			ret = exec_cmd(cmd);
 			if (CHECK_RET_EXIT(ret)) {
 				free_cmd(cmd);
+				free(line);
 				if (ret == RET_NORMAL_EXIT)
 					exit(0);
 				else
@@ -58,6 +59,7 @@ shell(int argc, char **argv)
 				ret = exec_cmd(cmd);
 				if (CHECK_RET_EXIT(ret)) {
 					free_cmd(cmd);
+					free(line);
 					if (ret == RET_NORMAL_EXIT)
 						exit(0);
 					else
@@ -69,6 +71,7 @@ shell(int argc, char **argv)
 				}
 			}
 			free_cmd(cmd);
+			free(line);
 		}
 	}
 
