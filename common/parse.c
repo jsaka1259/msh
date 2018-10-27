@@ -7,7 +7,6 @@ parse_cmd(char *line)
 {
 	char    *p    = line;
 	uint32_t capa = INIT_CAPA;
-	cmd_t   *cmd;
 	cmd       = xmalloc(sizeof(cmd_t));
 	cmd->argc = 0;
 	cmd->argv = xmalloc(sizeof(char*) * capa);

@@ -5,13 +5,16 @@ char *line;
 char*
 get_line(void)
 {
-	char  *line;
 	size_t i;
 	char   c;
 	line = xmalloc(sizeof(char*) * LINE_SIZE);
 	if (2 > LINE_SIZE) {
 		fprintf(stderr, "\rSystem Error: line buffer size is invalid [%lu]\n",
 		        LINE_SIZE);
+		if (cmd != NULL) {
+			free_cmd(cmd);
+		}
+		free(line);
 		exit(1);
 	}
 	i = 0;
@@ -22,6 +25,7 @@ get_line(void)
 			if (cmd != NULL) {
 				free_cmd(cmd);
 			}
+			free(line);
 			exit(0);
 		}
 		else if (i > 0 && c == 0x7F) {
