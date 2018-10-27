@@ -6,14 +6,10 @@
 #define USAGELEN 256
 #define DESCLEN  65536
 #define NOT_FOUND "%s: not found\n"
+#define EXIT_CMD "exit"
 
 #define RET_NORMAL        0x00
 #define RET_NOT_FOUND     0x01
-#define RET_NORMAL_EXIT   0xFF
-#define RET_ABNORMAL_EXIT 0xFE
-
-#define RET_EXIT_MASK  0xFE
-#define CHECK_RET_EXIT(ret) ((ret & RET_EXIT_MASK) == RET_EXIT_MASK)
 
 typedef struct {
 	uint32_t argc;

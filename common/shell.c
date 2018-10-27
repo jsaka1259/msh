@@ -34,13 +34,10 @@ shell(int argc, char **argv)
 		cmd = parse_cmd(line);
 		if (cmd->argc > 0) {
 			ret = exec_cmd(cmd);
-			if (CHECK_RET_EXIT(ret)) {
+			if (strcmp(EXIT_CMD, cmd->argv[0]) == 0) {
 				free_cmd(cmd);
 				free(line);
-				if (ret == RET_NORMAL_EXIT)
-					exit(0);
-				else
-					exit(1);
+				exit(ret);
 			}
 			else if (ret == RET_NOT_FOUND) {
 				fprintf(stdout, NOT_FOUND, cmd->argv[0]);
@@ -57,13 +54,10 @@ shell(int argc, char **argv)
 			cmd = parse_cmd(get_line());
 			if (cmd->argc > 0) {
 				ret = exec_cmd(cmd);
-				if (CHECK_RET_EXIT(ret)) {
+				if (strcmp(EXIT_CMD, cmd->argv[0]) == 0) {
 					free_cmd(cmd);
 					free(line);
-					if (ret == RET_NORMAL_EXIT)
-						exit(0);
-					else
-						exit(1);
+					exit(ret);
 				}
 				else if (ret == RET_NOT_FOUND) {
 					fprintf(stdout, NOT_FOUND, cmd->argv[0]);
