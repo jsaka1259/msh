@@ -14,7 +14,7 @@ get_line(void)
 		if (cmd != NULL) {
 			free_cmd(cmd);
 		}
-		free(line);
+		free_line();
 		exit(1);
 	}
 	i = 0;
@@ -25,7 +25,7 @@ get_line(void)
 			if (cmd != NULL) {
 				free_cmd(cmd);
 			}
-			free(line);
+			free_line();
 			exit(0);
 		}
 		else if (i > 0 && c == 0x7F) {
@@ -47,4 +47,10 @@ get_line(void)
 	fputc('\n', stdout);
 	fflush(stdout);
 	return line;
+}
+
+void
+free_line(void)
+{
+	free(line);
 }

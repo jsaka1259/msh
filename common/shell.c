@@ -14,6 +14,7 @@ shell(int argc, char **argv)
 	int     opt;
 	uint8_t copt = 0;
 	int8_t  ret;
+	char   *line;
 
 	while ((opt = getopt(argc, argv, "c:h")) != -1) {
 		switch (opt) {
@@ -56,7 +57,7 @@ shell(int argc, char **argv)
 				ret = exec_cmd(cmd);
 				if (strcmp(EXIT_CMD, cmd->argv[0]) == 0) {
 					free_cmd(cmd);
-					free(line);
+					free_line();
 					exit(ret);
 				}
 				else if (ret == RET_NOT_FOUND) {
@@ -65,7 +66,7 @@ shell(int argc, char **argv)
 				}
 			}
 			free_cmd(cmd);
-			free(line);
+			free_line();
 		}
 	}
 

@@ -3,7 +3,7 @@
 
 #define LINE_SIZE 80L
 
-extern char *line;
 extern char *get_line(void);
+extern void free_line(void);
 
 #endif
