@@ -3,6 +3,5 @@
 int
 main(int argc, char **argv)
 {
-	shell(argc, argv);
-	exit(0);
+	return shell(argc, argv);
 }
