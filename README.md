@@ -20,6 +20,7 @@ $ ./msh -h
 ## Command Help
 ```bash
 $ ./msh -c help
+$ ./msh -c 'help command ...'
 ```
 
 ## License
