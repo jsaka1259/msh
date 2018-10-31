@@ -9,7 +9,7 @@ typedef struct _node_t {
 } node_t;
 static node_t *head;
 static node_t *tail;
-char *line;
+static char *line;
 
 void
 init_history(void)
