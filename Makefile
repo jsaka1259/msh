@@ -1,12 +1,12 @@
-TARGET := msh
+BIN    := msh
 
-SCMN   := common
-SCMD   := $(SCMN)/cmd
+SCMN   := common/
+SCMD   := $(SCMN)cmd/
 
 OBJS   := main.o
-OBJS   += $(SCMN)/cmd.o $(SCMN)/getch.o $(SCMN)/line.o \
-          $(SCMN)/parse.o $(SCMN)/shell.o $(SCMN)/utils.o
-OBJS   += $(SCMD)/echo.o $(SCMD)/exit.o $(SCMD)/help.o
+OBJS   += $(SCMN)cmd.o $(SCMN)getch.o $(SCMN)line.o \
+          $(SCMN)parse.o $(SCMN)shell.o $(SCMN)utils.o
+OBJS   += $(SCMD)echo.o $(SCMD)exit.o $(SCMD)help.o
 
 CC     := gcc
 CFLAGS := -Wall
@@ -15,12 +15,12 @@ RM     := rm
 
 .SUFFIXES: .c .o
 
-$(TARGET): $(OBJS)
-	$(CC) $(CFLAGS) $(INC) -o $@ $(notdir $^)
+$(BIN): $(OBJS)
+	$(CC) $(CFLAGS) $(INC) -o $@ $^
 
 .c.o:
-	$(CC) $(CFLAGS) $(INC) -c $<
+	$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
 .PHONY: clean
 clean:
-	$(RM) -f $(notdir $(OBJS)) $(TARGET)
+	$(RM) -f $(OBJS) $(TARGET)
