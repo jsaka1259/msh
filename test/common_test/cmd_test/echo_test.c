@@ -44,6 +44,8 @@ msh_echo_test(int8_t d)
 		fprintf(stderr, "===> %s <===\n", __FUNCTION__);
 
 	for (i = 0; i < TCASE; i++) {
+		clear_out_buf();
+
 		for (j = 0; j < CAPA; j++)
 			p[i][j] = in_argv[i][j];
 		ret = msh_echo(in_argc[i], (char**)p[i]);
@@ -56,18 +58,15 @@ msh_echo_test(int8_t d)
 				all_result = 1;
 		}
 		else {
-			for (j = 1; j < in_argc[i]; j++) {
-				if (0 != strcmp(ex[i].out, out_buf)) {
-					result = 1;
-					if (0 == all_result)
-						all_result = 1;
-					break;
-				}
+			if (0 != strcmp(ex[i].out, out_buf)) {
+				result = 1;
+				if (0 == all_result)
+					all_result = 1;
 			}
 		}
 
 		if (d) {
-			fprintf(stderr, "<test case: %d> ", i);
+			fprintf(stderr, "<%s case: %d> ", __FUNCTION__, i);
 			if (0 == result)
 				fprintf(stderr, "SUCCESS\n");
 			else
@@ -76,9 +75,9 @@ msh_echo_test(int8_t d)
 			for (j = 0; j < in_argc[i]; j++)
 				fprintf(stderr, "     argv[%2d] = \"%s\"\n", j, in_argv[i][j]);
 			fprintf(stderr, "ex : ret      = %d\n", ex[i].ret);
-			fprintf(stderr, "     out      = \"%s\"\n", ex[i].out);
+			fprintf(stderr, "     out      = \n\"%s\"\n", ex[i].out);
 			fprintf(stderr, "out: ret      = %d\n", ret);
-			fprintf(stderr, "     out      = \"%s\"\n", out_buf);
+			fprintf(stderr, "     out      = \n\"%s\"\n", out_buf);
 		}
 	}
 

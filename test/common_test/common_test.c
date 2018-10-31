@@ -4,7 +4,15 @@
 
 int fd1;
 int fd2;
-char *out_buf;
+char *out_buf = NULL;
+
+void
+clear_out_buf(void)
+{
+	if (NULL == out_buf)
+		return;
+	memset(out_buf, 0x00, OUT_BUF_SIZE);
+}
 
 void
 set_stdout2buf(void)
@@ -19,8 +27,11 @@ set_stdout2buf(void)
 void
 unset_stdout2buf(void)
 {
+	fflush(stdout);
 	setvbuf(stdout, NULL, _IOFBF, BUFSIZ);
 	dup2(fd1, stdout->_fileno);
 	close(fd2);
+	clear_out_buf();
 	free(out_buf);
+	out_buf = NULL;
 }

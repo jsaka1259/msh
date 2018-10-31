@@ -9,6 +9,7 @@
 #include "cmd_test.h"
 
 extern char *out_buf;
+extern void clear_out_buf(void);
 extern void set_stdout2buf(void);
 extern void unset_stdout2buf(void);
 

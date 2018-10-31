@@ -53,7 +53,7 @@ msh_exit_test(int8_t d)
 		}
 
 		if (d) {
-			fprintf(stderr, "<test case: %d> ", i);
+			fprintf(stderr, "<%s case: %d> ", __FUNCTION__, i);
 			if (0 == result)
 				fprintf(stderr, "SUCCESS\n");
 			else

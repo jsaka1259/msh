@@ -21,10 +21,11 @@ main(int argc, char **argv)
 
 	ret += msh_echo_test(dopt);
 	ret += msh_exit_test(dopt);
+	ret += msh_help_test(dopt);
 
 	if (ret == 0)
 		fprintf(stdout, "ALL SUCCESS\n");
 	else
-		fprintf(stdout, "FAILURE\n");
+		fprintf(stdout, "FAILURE [%lu]\n", ret);
 	return 0;
 }

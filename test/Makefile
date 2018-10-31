@@ -7,7 +7,8 @@ TCMD   := $(TCMN)cmd_test/
 
 OBJS   := test.o
 OBJS   += $(TCMN)common_test.o
-OBJS   += $(TCMD)echo_test.o $(TCMD)exit_test.o
+OBJS   += $(TCMD)echo_test.o $(TCMD)exit_test.o \
+          $(TCMD)help_test.o
 OBJS   += $(SCMN)cmd.o $(SCMN)getch.o $(SCMN)line.o \
           $(SCMN)parse.o $(SCMN)shell.o $(SCMN)utils.o
 OBJS   += $(SCMD)echo.o $(SCMD)exit.o $(SCMD)help.o
