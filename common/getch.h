@@ -1,5 +1,5 @@
-#ifndef _GETCH_
-#define _GETCH_
+#ifndef _GETCH_H_
+#define _GETCH_H_
 
 extern int getch(void);
 

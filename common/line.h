@@ -1,5 +1,5 @@
-#ifndef _LINE_
-#define _LINE_
+#ifndef _LINE_H_
+#define _LINE_H_
 
 #define LINE_SIZE 80UL
 

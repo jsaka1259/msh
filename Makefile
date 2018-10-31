@@ -23,4 +23,4 @@ $(BIN): $(OBJS)
 
 .PHONY: clean
 clean:
-	$(RM) -f $(OBJS) $(TARGET)
+	$(RM) -f $(OBJS) $(BIN)

@@ -1,5 +1,5 @@
-#ifndef _SHELL_
-#define _SHELL_
+#ifndef _SHELL_H_
+#define _SHELL_H_
 
 #define MSH     "msh"
 #define VERSION "0.0.3"

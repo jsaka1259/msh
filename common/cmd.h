@@ -1,5 +1,5 @@
-#ifndef _CMD_
-#define _CMD_
+#ifndef _CMD_H_
+#define _CMD_H_
 
 #define NCMD     3
 #define CMDLEN   256
