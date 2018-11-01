@@ -27,5 +27,5 @@ main(int argc, char **argv)
 		fprintf(stdout, "ALL SUCCESS\n");
 	else
 		fprintf(stdout, "FAILURE [%lu]\n", ret);
-	return 0;
+	return ret == 0 ? 0 : 1;
 }

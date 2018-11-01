@@ -22,10 +22,12 @@ set_stdout2buf(void)
 		perror("set_stdout2buf");
 		exit(1);
 	}
-	setvbuf(stdout, out_buf, _IOFBF, sizeof(char*) * OUT_BUF_SIZE);
 	fd1 = dup(stdout->_fileno);
 	fd2 = open("/dev/null", O_WRONLY);
 	dup2(fd2, stdout->_fileno);
+	setvbuf(stdout, out_buf, _IOFBF, sizeof(char*) * OUT_BUF_SIZE);
+	fprintf(stdout, "\n");
+	fflush(stdout);
 }
 
 void
