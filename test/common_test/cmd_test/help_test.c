@@ -1,6 +1,6 @@
 #include <common_test.h>
 
-#define TCASE   6
+#define TCASE   7
 #define CAPA    8
 #define OUT_LEN (NCMD * CMDLEN) + (NCMD * USAGELEN) + (NCMD * DESCLEN) + 4
 
@@ -11,6 +11,7 @@ static uint32_t in_argc[TCASE] = {
 	2,
 	2,
 	4,
+	2,
 };
 
 static char in_argv[TCASE][CAPA][LINE_SIZE] = {
@@ -20,6 +21,7 @@ static char in_argv[TCASE][CAPA][LINE_SIZE] = {
 	{"help", "exit"},
 	{"help", "help"},
 	{"help", "echo", "exit", "help"},
+	{"help", "xyz"},
 };
 
 typedef struct {
@@ -28,6 +30,7 @@ typedef struct {
 } ret_t;
 
 static ret_t ex[TCASE] = {
+	{0, },
 	{0, },
 	{0, },
 	{0, },
@@ -77,55 +80,55 @@ init_ex(void)
 	strncpy(ex[5].out, ex[2].out, OUT_LEN);
 	strncat(ex[5].out, ex[3].out, OUT_LEN);
 	strncat(ex[5].out, ex[4].out, OUT_LEN);
+
+	ex[6].out = xmalloc(sizeof(char*) * OUT_LEN + 1);
+	strncpy(ex[6].out, in_argv[6][1], OUT_LEN);
+	strncat(ex[6].out, ": not found\n", OUT_LEN);
 }
 
 static void
 free_ex(void)
 {
-	free(ex[0].out);	
-	free(ex[2].out);	
-	free(ex[3].out);	
-	free(ex[4].out);	
-	free(ex[5].out);	
+	free(ex[0].out);
+	free(ex[2].out);
+	free(ex[3].out);
+	free(ex[4].out);
+	free(ex[5].out);
+	free(ex[6].out);
 }
 
-int8_t
+uint64_t
 msh_help_test(int8_t d)
 {
 	uint32_t i, j;
 	char *p[TCASE][CAPA];
 	int8_t ret;
 	uint8_t result;
-	uint8_t all_result = 0;
+	uint64_t nfail = 0;
 
 	init_ex();
+	set_stdout2buf();
 
 	if (d)
 		fprintf(stderr, "===> %s <===\n", __FUNCTION__);
-
-	set_stdout2buf();
 
 	for (i = 0; i < TCASE; i++) {
 		clear_out_buf();
 
 		for (j = 0; j < CAPA; j++)
 			p[i][j] = in_argv[i][j];
-		
+
 		ret = msh_help(in_argc[i], (char**)p[i]);
 		fflush(stdout);
 
 		result = 0;
 		if (ex[i].ret != ret) {
 			result = 1;
-			if (0 == all_result)
-				all_result = 1;
+			nfail++;
 		}
-		else {
-			if (0 != strcmp(ex[i].out, out_buf)) {
-				result = 1;
-				if (0 == all_result)
-					all_result = 1;
-			}
+		if (0 != strcmp(ex[i].out, out_buf)) {
+			result = 1;
+			nfail++;
 		}
 
 		if (d) {
@@ -145,15 +148,14 @@ msh_help_test(int8_t d)
 	}
 
 	if (d) {
-		if (0 == all_result)
+		if (0 == nfail)
 			fprintf(stderr, ">>>> SUCCESS <<<<\n\n");
 		else
-			fprintf(stderr, ">>>> FAILURE <<<<\n\n");
+			fprintf(stderr, ">>>> FAILURE [%lu] <<<<\n\n", nfail);
 	}
 
 	unset_stdout2buf();
-
 	free_ex();
 
-	return all_result;
+	return nfail;
 }

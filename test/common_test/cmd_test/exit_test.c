@@ -27,14 +27,14 @@ static int8_t ex[TCASE] = {
 	-1,
 };
 
-int8_t
+uint64_t
 msh_exit_test(int8_t d)
 {
 	uint32_t i, j;
 	char *p[TCASE][CAPA];
 	int8_t ret;
 	uint8_t result;
-	uint8_t all_result = 0;
+	uint64_t nfail = 0;
 
 	if (d)
 		fprintf(stderr, "===> %s <===\n", __FUNCTION__);
@@ -48,8 +48,7 @@ msh_exit_test(int8_t d)
 		result = 0;
 		if (ex[i] != ret) {
 			result = 1;
-			if (0 == all_result)
-				all_result = 1;
+			nfail++;
 		}
 
 		if (d) {
@@ -67,11 +66,11 @@ msh_exit_test(int8_t d)
 	}
 
 	if (d) {
-		if (0 == all_result)
+		if (0 == nfail)
 			fprintf(stderr, ">>>> SUCCESS <<<<\n\n");
 		else
-			fprintf(stderr, ">>>> FAILURE <<<<\n\n");
+			fprintf(stderr, ">>>> FAILURE [%lu] <<<<\n\n", nfail);
 	}
 
-	return all_result;
+	return nfail;
 }

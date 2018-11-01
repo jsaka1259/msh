@@ -29,14 +29,14 @@ static ret_t ex[TCASE] = {
 	{0, "abc def\n"},
 };
 
-int8_t
+uint64_t
 msh_echo_test(int8_t d)
 {
 	uint32_t i, j;
 	char *p[TCASE][CAPA];
 	int8_t ret;
 	uint8_t result;
-	uint8_t all_result = 0;
+	uint64_t nfail = 0;
 
 	set_stdout2buf();
 
@@ -54,15 +54,11 @@ msh_echo_test(int8_t d)
 		result = 0;
 		if (ex[i].ret != ret) {
 			result = 1;
-			if (0 == all_result)
-				all_result = 1;
+			nfail++;
 		}
-		else {
-			if (0 != strcmp(ex[i].out, out_buf)) {
-				result = 1;
-				if (0 == all_result)
-					all_result = 1;
-			}
+		if (0 != strcmp(ex[i].out, out_buf)) {
+			result = 1;
+			nfail++;
 		}
 
 		if (d) {
@@ -82,13 +78,13 @@ msh_echo_test(int8_t d)
 	}
 
 	if (d) {
-		if (0 == all_result)
+		if (0 == nfail)
 			fprintf(stderr, ">>>> SUCCESS <<<<\n\n");
 		else
-			fprintf(stderr, ">>>> FAILURE <<<<\n\n");
+			fprintf(stderr, ">>>> FAILURE [%lu] <<<<\n\n", nfail);
 	}
 
 	unset_stdout2buf();
 
-	return all_result;
+	return nfail;
 }

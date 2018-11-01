@@ -18,6 +18,10 @@ void
 set_stdout2buf(void)
 {
 	out_buf = malloc(sizeof(char*) * OUT_BUF_SIZE);
+	if (NULL == out_buf) {
+		perror("set_stdout2buf");
+		exit(1);
+	}
 	setvbuf(stdout, out_buf, _IOFBF, sizeof(char*) * OUT_BUF_SIZE);
 	fd1 = dup(stdout->_fileno);
 	fd2 = open("/dev/null", O_WRONLY);
