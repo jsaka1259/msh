@@ -24,17 +24,70 @@ static char in_argv[TCASE][CAPA][LINE_SIZE] = {
 
 typedef struct {
 	int8_t  ret;
-	char    out[OUT_LEN];
+	char   *out;
 } ret_t;
 
 static ret_t ex[TCASE] = {
-	{0, ""},
-	{0, ""},
-	{0, ""},
-	{0, ""},
-	{0, ""},
-	{0, ""},
+	{0, },
+	{0, },
+	{0, },
+	{0, },
+	{0, },
+	{0, },
 };
+
+static void
+init_ex(void)
+{
+	ex[0].out = xmalloc(sizeof(char*) * OUT_LEN + 1);
+	strncpy(ex[0].out, cmd_usage[0], OUT_LEN);
+	strncat(ex[0].out, "\n", OUT_LEN);
+	strncat(ex[0].out, cmd_usage[1], OUT_LEN);
+	strncat(ex[0].out, "\n", OUT_LEN);
+	strncat(ex[0].out, cmd_usage[2], OUT_LEN);
+	strncat(ex[0].out, "\n", OUT_LEN);
+
+	ex[1].out = ex[0].out;
+
+	ex[2].out = xmalloc(sizeof(char*) * OUT_LEN + 1);
+	strncpy(ex[2].out, cmds[0], OUT_LEN);
+	strncat(ex[2].out, ": ", OUT_LEN);
+	strncat(ex[2].out, cmd_usage[0], OUT_LEN);
+	strncat(ex[2].out, "\n", OUT_LEN);
+	strncat(ex[2].out, cmd_desc[0], OUT_LEN);
+	strncat(ex[2].out, "\n", OUT_LEN);
+
+	ex[3].out = xmalloc(sizeof(char*) * OUT_LEN + 1);
+	strncpy(ex[3].out, cmds[1], OUT_LEN);
+	strncat(ex[3].out, ": ", OUT_LEN);
+	strncat(ex[3].out, cmd_usage[1], OUT_LEN);
+	strncat(ex[3].out, "\n", OUT_LEN);
+	strncat(ex[3].out, cmd_desc[1], OUT_LEN);
+	strncat(ex[3].out, "\n", OUT_LEN);
+
+	ex[4].out = xmalloc(sizeof(char*) * OUT_LEN + 1);
+	strncpy(ex[4].out, cmds[2], OUT_LEN);
+	strncat(ex[4].out, ": ", OUT_LEN);
+	strncat(ex[4].out, cmd_usage[2], OUT_LEN);
+	strncat(ex[4].out, "\n", OUT_LEN);
+	strncat(ex[4].out, cmd_desc[2], OUT_LEN);
+	strncat(ex[4].out, "\n", OUT_LEN);
+
+	ex[5].out = xmalloc(sizeof(char*) * OUT_LEN + 1);
+	strncpy(ex[5].out, ex[2].out, OUT_LEN);
+	strncat(ex[5].out, ex[3].out, OUT_LEN);
+	strncat(ex[5].out, ex[4].out, OUT_LEN);
+}
+
+static void
+free_ex(void)
+{
+	free(ex[0].out);	
+	free(ex[2].out);	
+	free(ex[3].out);	
+	free(ex[4].out);	
+	free(ex[5].out);	
+}
 
 int8_t
 msh_help_test(int8_t d)
@@ -45,39 +98,7 @@ msh_help_test(int8_t d)
 	uint8_t result;
 	uint8_t all_result = 0;
 
-	strncpy(ex[0].out, cmd_usage[0], OUT_LEN);
-	strncat(ex[0].out, "\n", OUT_LEN);
-	strncat(ex[0].out, cmd_usage[1], OUT_LEN);
-	strncat(ex[0].out, "\n", OUT_LEN);
-	strncat(ex[0].out, cmd_usage[2], OUT_LEN);
-	strncat(ex[0].out, "\n", OUT_LEN);
-
-	strncpy(ex[1].out, ex[0].out, OUT_LEN);
-
-	strncpy(ex[2].out, cmds[0], OUT_LEN);
-	strncat(ex[2].out, ": ", OUT_LEN);
-	strncat(ex[2].out, cmd_usage[0], OUT_LEN);
-	strncat(ex[2].out, "\n", OUT_LEN);
-	strncat(ex[2].out, cmd_desc[0], OUT_LEN);
-	strncat(ex[2].out, "\n", OUT_LEN);
-
-	strncpy(ex[3].out, cmds[1], OUT_LEN);
-	strncat(ex[3].out, ": ", OUT_LEN);
-	strncat(ex[3].out, cmd_usage[1], OUT_LEN);
-	strncat(ex[3].out, "\n", OUT_LEN);
-	strncat(ex[3].out, cmd_desc[1], OUT_LEN);
-	strncat(ex[3].out, "\n", OUT_LEN);
-
-	strncpy(ex[4].out, cmds[2], OUT_LEN);
-	strncat(ex[4].out, ": ", OUT_LEN);
-	strncat(ex[4].out, cmd_usage[2], OUT_LEN);
-	strncat(ex[4].out, "\n", OUT_LEN);
-	strncat(ex[4].out, cmd_desc[2], OUT_LEN);
-	strncat(ex[4].out, "\n", OUT_LEN);
-
-	strncpy(ex[5].out, ex[2].out, OUT_LEN);
-	strncat(ex[5].out, ex[3].out, OUT_LEN);
-	strncat(ex[5].out, ex[4].out, OUT_LEN);
+	init_ex();
 
 	if (d)
 		fprintf(stderr, "===> %s <===\n", __FUNCTION__);
@@ -131,6 +152,8 @@ msh_help_test(int8_t d)
 	}
 
 	unset_stdout2buf();
+
+	free_ex();
 
 	return all_result;
 }
