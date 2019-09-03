@@ -12,8 +12,8 @@
 #define RET_NOT_FOUND     0x01
 
 typedef struct {
-	uint32_t argc;
-	char   **argv;
+  uint32_t argc;
+  char   **argv;
 } cmd_t;
 
 extern int8_t msh_echo(uint32_t argc, char **argv);
