@@ -1,7 +1,6 @@
-#include <common.h>
+#include "utils.h"
 
-void *xmalloc(size_t size)
-{
+void *xmalloc(size_t size) {
   void *p;
 
   p = malloc(size);
@@ -12,16 +11,18 @@ void *xmalloc(size_t size)
   return p;
 }
 
-void *xrealloc(void *ptr, size_t size)
-{
+void *xrealloc(void *ptr, size_t size) {
   void *p;
 
   if (!ptr)
     return xmalloc(size);
+
   p = realloc(ptr, size);
+
   if (!p) {
     perror("xrelloc");
     exit(1);
   }
+
   return p;
 }

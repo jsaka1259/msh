@@ -1,12 +1,6 @@
-#include <common.h>
+#include "msh.h"
 
-#define USAGE "Usage: %s [-c \'command arg ...\']\n" \
-              "Option:\n" \
-              "  -c command arg ...: execute COMMAND with ARGs\n" \
-              "  -h                : display help\n"
-
-int8_t shell(int argc, char **argv)
-{
+int main(int argc, char **argv) {
   int     opt;
   uint8_t copt = 0;
   int8_t  ret;
@@ -29,8 +23,10 @@ int8_t shell(int argc, char **argv)
 
   if (copt) {
     cmd = parse_cmd(line);
+
     if (cmd->argc > 0) {
       ret = exec_cmd(cmd);
+
       if (strcmp(EXIT_CMD, cmd->argv[0]) == 0) {
         free(line);
         free_cmd(cmd);
@@ -40,16 +36,21 @@ int8_t shell(int argc, char **argv)
         fflush(stdout);
       }
     }
+
     free(line);
     free_cmd(cmd);
   } else {
     init_history();
+
     while (1) {
       fprintf(stdout, "%s", PROMPT);
       fflush(stdout);
+
       cmd = parse_cmd(get_cmd());
+
       if (cmd->argc > 0) {
         ret = exec_cmd(cmd);
+
         if (strcmp(EXIT_CMD, cmd->argv[0]) == 0) {
           free_cmd(cmd);
           delete_history();
