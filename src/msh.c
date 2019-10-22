@@ -1,11 +1,6 @@
-#include <common.h>
+#include "msh.h"
 
-#define USAGE "Usage: %s [-c \'command arg ...\']\n" \
-              "Option:\n" \
-              "  -c command arg ...: execute COMMAND with ARGs\n" \
-              "  -h                : display help\n"
-
-int8_t shell(int argc, char **argv)
+int main(int argc, char **argv)
 {
   int     opt;
   uint8_t copt = 0;

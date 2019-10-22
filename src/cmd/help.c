@@ -1,4 +1,4 @@
-#include <common.h>
+#include "cmd.h"
 
 int8_t msh_help(uint32_t argc, char **argv)
 {

@@ -1,26 +1,32 @@
-BIN    := msh
+BIN     := msh
 
-SCMN   := common/
-SCMD   := $(SCMN)cmd/
+SRCDIR  := src
+CMNDIR  := $(SRCDIR)/common
+CMDDIR  := $(SRCDIR)/cmd
 
-OBJS   := main.o
-OBJS   += $(SCMN)cmd.o $(SCMN)getch.o $(SCMN)line.o \
-          $(SCMN)parse.o $(SCMN)shell.o $(SCMN)utils.o
-OBJS   += $(SCMD)echo.o $(SCMD)exit.o $(SCMD)help.o
+OUTDIR  := build
+SRCS    := $(wildcard $(SRCDIR)/*.c)
+SRCS    += $(wildcard $(CMNDIR)/*.c)
+SRCS    += $(wildcard $(CMDDIR)/*.c)
+OBJS    := $(addprefix $(OUTDIR)/,$(patsubst %.c,%.o,$(SRCS)))
 
-CC     := gcc
-CFLAGS := -Wall
-INC    := -I $(SCMN)
-RM     := rm
+CC      := gcc
+INCS    := -I $(SRC)
+CFLAGS  := -Wall
+RM      := rm
 
-.SUFFIXES: .c .o
+.PHONY: all rebuild clean
+
+all: $(BIN)
+
+rebuild: clean all
 
 $(BIN): $(OBJS)
-	$(CC) $(CFLAGS) $(INC) -o $@ $^
+	$(CC) $(CFLAGS) -o $@ $^
 
-.c.o:
-	$(CC) $(CFLAGS) $(INC) -c $< -o $@
+$(OUTDIR)/%.o:%.c
+	@if [ ! -e `dirname $@` ]; then mkdir -p `dirname $@`; fi
+	$(CC) $(CFLAGS) -c $< -o $@
 
-.PHONY: clean
 clean:
-	$(RM) -f $(OBJS) $(BIN)
+	$(RM) -rf $(OUTDIR)/*

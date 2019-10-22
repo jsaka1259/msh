@@ -1,4 +1,4 @@
-#include <common.h>
+#include "../msh.h"
 
 int8_t msh_exit(uint32_t argc, char **argv)
 {

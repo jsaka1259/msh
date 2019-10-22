@@ -1,8 +1,8 @@
-#include <common.h>
+#include "msh.h"
 
 #define LIST_SIZE 8
 
-typedef struct {
+typedef struct _node_t {
   char *data;
   struct _node_t *prev;
   struct _node_t *next;

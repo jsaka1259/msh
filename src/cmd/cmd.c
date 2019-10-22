@@ -1,4 +1,4 @@
-#include <common.h>
+#include "cmd.h"
 
 cmd_t *cmd;
 

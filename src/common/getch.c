@@ -1,4 +1,4 @@
-#include <common.h>
+#include "getch.h"
 
 int getch(void)
 {
