@@ -1,4 +1,4 @@
-#include "../msh.h"
+#include "cmd.h"
 
 int8_t msh_exit(uint32_t argc, char **argv) {
   if (1 >= argc)
