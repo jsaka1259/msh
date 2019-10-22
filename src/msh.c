@@ -39,7 +39,6 @@ int main(int argc, char **argv) {
 
     free(line);
     free_cmd(cmd);
-
   } else {
     init_history();
 

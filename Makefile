@@ -10,7 +10,6 @@ OBJS    := $(addprefix $(OUTDIR)/,$(patsubst %.c,%.o,$(SRCS)))
 BIN     := $(OUTDIR)/msh
 
 CC      := gcc
-INCS    := -I $(SRC)
 CFLAGS  := -Wall
 RM      := rm
 
