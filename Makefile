@@ -1,5 +1,3 @@
-BIN     := msh
-
 SRCDIR  := src
 CMNDIR  := $(SRCDIR)/common
 CMDDIR  := $(SRCDIR)/cmd
@@ -9,6 +7,7 @@ SRCS    := $(wildcard $(SRCDIR)/*.c)
 SRCS    += $(wildcard $(CMNDIR)/*.c)
 SRCS    += $(wildcard $(CMDDIR)/*.c)
 OBJS    := $(addprefix $(OUTDIR)/,$(patsubst %.c,%.o,$(SRCS)))
+BIN     := $(OUTDIR)/msh
 
 CC      := gcc
 INCS    := -I $(SRC)
@@ -29,4 +28,4 @@ $(OUTDIR)/%.o:%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	$(RM) -rf $(OUTDIR)/*
+	$(RM) -rf $(OUTDIR)
