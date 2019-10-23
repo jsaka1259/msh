@@ -10,7 +10,7 @@
 #define CMDLEN   256
 #define USAGELEN 256
 #define DESCLEN  65536
-#define NOT_FOUND "%s: not found\n"
+#define NOT_FOUND "\e[31m%s: command not found\e[m\n"
 #define EXIT_CMD "exit"
 
 #define RET_NORMAL        0x00
@@ -25,7 +25,6 @@ extern int8_t msh_echo(uint32_t argc, char **argv);
 extern int8_t msh_exit(uint32_t argc, char **argv);
 extern int8_t msh_help(uint32_t argc, char **argv);
 
-extern cmd_t *cmd;
 extern const char cmds[NCMD][CMDLEN];
 extern const char cmd_usage[NCMD][USAGELEN];
 extern const char cmd_desc[NCMD][DESCLEN];
