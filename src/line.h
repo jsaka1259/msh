@@ -1,10 +1,6 @@
 #ifndef _LINE_H_
 #define _LINE_H_
 
-#ifndef _GNU_SOURCE
-#define _GNU_SOURCE
-#endif
-
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>

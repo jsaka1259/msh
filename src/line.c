@@ -136,7 +136,7 @@ static void get_line(char *line) {
       fflush(stdout);
 
       strncpy(line, p->data, LINE_SIZE);
-      len = strnlen(line, LINE_SIZE);
+      len = strlen(line);
 
       fputs(line, stdout);
       fflush(stdout);
