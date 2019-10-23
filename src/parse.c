@@ -1,22 +1,23 @@
-#include "msh.h"
+#include "parse.h"
 
 #define INIT_CAPA 8
 
 cmd_t *parse_cmd(char *line) {
+  cmd_t   *cmd;
   char    *p    = line;
   uint32_t capa = INIT_CAPA;
 
-  cmd           = xmalloc(sizeof(cmd_t));
-  cmd->argc     = 0;
-  cmd->argv     = xmalloc(sizeof(char*) * capa);
+  cmd       = xmalloc(sizeof(cmd_t));
+  cmd->argc = 0;
+  cmd->argv = xmalloc(sizeof(char *) * capa);
 
   while (*p) {
     while (*p && 0x20 == *p)
       *p++ = 0x00;
 
     if (*p) {
-      if (capa <= cmd->argc + 1) {
-        capa *= 2;
+      if (cmd->argc + 1 >= capa) {
+        capa     *= 2;
         cmd->argv = xrealloc(cmd->argv, sizeof(char*) * capa);
       }
 
@@ -26,7 +27,8 @@ cmd_t *parse_cmd(char *line) {
     while (*p && 0x20 != *p)
       p++;
   }
-  cmd->argv[cmd->argc] = 0x00;
+  cmd->argv[cmd->argc] = NULL;
+
   return cmd;
 }
 
