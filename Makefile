@@ -13,11 +13,7 @@ CC      := gcc
 CFLAGS  := -Wall
 RM      := rm
 
-.PHONY: all rebuild clean
-
-all: $(BIN)
-
-rebuild: clean all
+.PHONY: clean rebuild
 
 $(BIN): $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $^
@@ -28,3 +24,5 @@ $(OUTDIR)/%.o:%.c
 
 clean:
 	$(RM) -rf $(OUTDIR)
+
+rebuild: clean all
