@@ -25,4 +25,4 @@ $(OUTDIR)/%.o:%.c
 clean:
 	$(RM) -rf $(OUTDIR)
 
-rebuild: clean all
+rebuild: clean $(BIN)
